@@ -2,15 +2,15 @@
 
 Ce projet s'inscrit dans le cadre d'une mise en oeuvre d'une application web éducatif pour la crypto-monnaie
 
-## Langage de programmation
+# Langage de programmation
 
 + Php 7.1 ou plus
 
-## Dépendance
+# Dépendance
 
 + AltoRouter
 
-### installation
+### installation
 
 Aller dans la racine du projet et faites `Composer install` pour pouvoir l'installer
 
