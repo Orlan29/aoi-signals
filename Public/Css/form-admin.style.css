@@ -1,0 +1,58 @@
+.aoi-header {
+    border-bottom: 2px solid rgb(77, 77, 77);
+}
+
+.aoi-logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.aoi-logo, .aoi-footer-logo {
+    width: 100px;
+    height: auto;
+}
+
+.aoi-footer-logo {
+    filter:grayscale(10);
+}
+
+.aoi-form-section {
+    height: calc(100vh - 175px) !important;
+}
+
+.aoi-form {
+    padding: 10px;
+    border: 1px solid rgb(77, 77, 77);
+    box-shadow: 2px 3px 4px rgba(77, 77, 77, 0.5);
+    border-radius: 5px;
+    margin-top: 50px !important;
+}
+
+.aoi-form-label-error {
+    font-size: 0.85rem;
+    display: none;
+    color: rgb(233, 41, 41);
+    margin-top: 5px;
+}
+
+.aoi-form-error {
+    border: 2px solid rgb(233, 41, 41);
+}
+
+.aoi-form-error:focus {
+    border: 2px solid rgb(233, 41, 41);
+    box-shadow: 0 0 0 .25rem rgba(233, 41, 41, 0.25);
+}
+
+.aoi-error-active {
+    display: block;
+}
+
+.aoi-form-head {
+    font-size: 1.5rem;
+}
+
+.form-group {
+    margin-top: 10px;
+}
