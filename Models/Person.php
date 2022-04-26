@@ -26,8 +26,11 @@ abstract class Person
             if (is_string($key)) {
                 $method = 'set' . ucfirst($key);
 
-                if (method_exists($this, $method)) {
+                if (method_exists($this, $method) && !empty($value)) {
                     $this->$method($value);
+                    /*echo '<pre>';
+                    var_dump($method);
+                    echo '</pre>';*/
                 }
             }
         }
@@ -48,7 +51,7 @@ abstract class Person
      * @return string
      */
 
-    public function getLastName(): string
+    public function getLast_name(): string
     {
         return $this->last_name;
     }
@@ -75,7 +78,7 @@ abstract class Person
      * @return string
      */
 
-    public function getFirstName(): string
+    public function getFirst_name(): string
     {
         return $this->first_name;
     }
@@ -121,7 +124,7 @@ abstract class Person
      * @param string $name
      * @return void
      */
-    public function setFirstName(string $name): void
+    public function setFirst_name(string $name): void
     {
         if (!isset($name)) {
             trigger_error('Le nom n\'est pas définit', E_USER_ERROR);
@@ -134,7 +137,7 @@ abstract class Person
      * @param string $name
      * @return void
      */
-    public function setLastName(string $name): void
+    public function setLast_name(string $name): void
     {
         if (!isset($name)) {
             trigger_error('Le prénoms n\'est pas définit', E_USER_ERROR);

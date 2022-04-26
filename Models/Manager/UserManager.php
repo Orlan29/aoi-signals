@@ -10,21 +10,14 @@ use App\Models\Manager\PremiumUserManager as PremiumUserManager;
 class UserManager extends PremiumUserManager
 {
     /**
-     * Database connexion
-     * @var \PDO $db
+     * @var string $table
      */
-    protected \PDO $db;
-
-    /**
-     * @var string $user_table
-     */
-    protected string $user_table;
+    protected string $table;
 
     public function __construct(\PDO $db)
     {
-        $this->db = $db;
-        $this->user_table = 'Users';
         parent::__construct($db);
+        $this->table = 'Users';
     }
 
     /**
@@ -33,9 +26,9 @@ class UserManager extends PremiumUserManager
      */
     public function getUserById(int $id): User
     {
-        $sql = "SELECT * FROM $this->user_table WHERE $this->user_table.id = :id";
+        $sql = "SELECT * FROM {$this->table} WHERE {$this->table}.id = :id";
 
-        $query = $this->db_connect->prepare($sql);
+        $query = $this->db->prepare($sql);
         $query->bindValue(':id', $id);
         $query->execute();
 
@@ -49,10 +42,9 @@ class UserManager extends PremiumUserManager
      */
     public function getAllUsers(): array
     {
-        $sql = "SELECT * FROM $this->user_table";
+        $sql = "SELECT * FROM {$this->table}";
 
         $query = $this->db->query($sql);
-        $query->execute();
 
         $users = [];
 
@@ -69,31 +61,42 @@ class UserManager extends PremiumUserManager
      */
     public function addUser(User $user): void
     {
-        $sql = 'INSERT INTO Users(
+        $sql = "INSERT INTO {$this->table}(
             last_name,
             first_name,
             email,
             registered_date,
-            godfather_id,
-            godson_id,
-            user_password)
+            user_password,
+            phone,
+            city,
+            country,
+            birthday,
+            user_ref)
             VALUES(
                 :last_name,
                 :first_name,
                 :email,
                 NOW(),
-                :godfather_id,
-                :godson_id,
-                :user_password);';
+                :user_password,
+                :phone,
+                :city,
+                :country,
+                :birthday,
+                :user_ref)";
 
         $query = $this->db->prepare($sql);
 
-        $query->bindValue(':last_name', $user->last_name);
-        $query->bindValue(':first_name', $user->first_name);
-        $query->bindValue(':email', $user->email);
-        $query->bindValue(':godfather_id', $user->godfather_id);
-        $query->bindValue(':godson_id', $user->godson_id);
-        $query->bindValue(':user_password', $user->user_password);
+        $query->bindValue(':last_name', $user->getLast_name());
+        $query->bindValue(':first_name', $user->getFirst_name());
+        $query->bindValue(':email', $user->getEmail());
+        //$query->bindValue(':godfather_id', $user->getGodfather_id());
+        //$query->bindValue(':godson_id', $user->getGodson_id());
+        $query->bindValue(':user_password', $user->getUser_password());
+        $query->bindValue(':phone', $user->getPhone());
+        $query->bindValue(':city', $user->getCity());
+        $query->bindValue(':country', $user->getCountry());
+        $query->bindValue(':user_ref', $user->getUser_ref());
+        $query->bindValue(':birthday', $user->getBirthday());
 
         $query->execute();
     }
@@ -104,24 +107,19 @@ class UserManager extends PremiumUserManager
      */
     public function updateUser(User $user): void
     {
-
-        $sql = 'UPDATE Users
+        $sql = "UPDATE {$this->table}
             SET
                 last_name = :last_name,
-                first_user = :first_name,
+                first_name = :first_name,
                 email = :email,
-                godfather = :godfather_id,
-                godson = :godson_id,
-                user_password = :user_password);';
+                user_password = :user_password";
 
         $query = $this->db->prepare($sql);
 
-        $query->bindValue(':last_name', $user->last_name);
-        $query->bindValue(':first_name', $user->first_name);
-        $query->bindValue(':email', $user->email);
-        $query->bindValue(':godfather_id', $user->godfather_id);
-        $query->bindValue(':godson_id', $user->godson_id);
-        $query->bindValue(':user_password', $user->user_password);
+        $query->bindValue(':last_name', $user->getLast_name());
+        $query->bindValue(':first_name', $user->getFirst_name());
+        $query->bindValue(':email', $user->getEmail());
+        $query->bindValue(':user_password', $user->getUser_password());
 
         $query->execute();
     }

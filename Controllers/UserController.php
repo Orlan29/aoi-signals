@@ -4,34 +4,19 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Config\DatabaseConexion as DatabaseConexion;
-use App\Config\Autoloader as Autoloader;
 use App\Models\User\User as User;
 use App\Models\Manager\UserManager as UserManager;
-use App\Models\Manager\PremiumUserManager as PremiumUserManager;
-
-// Initialize autoloader
-require_once '../Config/Autoloader.php';
-Autoloader::register();
-
-// Try to connect database
-$db = new DatabaseConexion();
-
-// Initialize managers
-$user_manager = new UserManager($db->connect());
-$pum = new PremiumUserManager($db->connect());
 
 class UserController
 {
     /**
-     * User manager
      * @var UserManager $user_manager
      */
     protected UserManager $user_manager;
 
     public function __construct(UserManager $user_manager)
     {
-        if (isset($user_manager) && isset($pum)) {
+        if (isset($user_manager)) {
             $this->user_manager = $user_manager;
         }
     }
@@ -47,10 +32,10 @@ class UserController
             throw new \Exception('Cet utilisateur n\'existe pas');
         }
 
-        if (!$this->user_manager->isPremiumUser($id))
+        //if (!$this->user_manager->isPremiumUser($id))
             return $this->user_manager->getUserById($id);
-        else
-            return $this->user_manager->getPremiumUser($id);
+        /*else
+            return $this->user_manager->getPremiumUser($id);*/
     }
 
     /**
@@ -61,7 +46,6 @@ class UserController
     {
         return array(
             'users' => $this->user_manager->getAllUsers(),
-            'premium_users' => '',
             'number' => $this->user_manager->countUsers()
         );
     }

@@ -20,7 +20,7 @@ abstract class Manager
      */
     public function deleteUser(int $id): void
     {
-        $sql = "DELETE FROM $this->table WHERE $this->table.id = :id";
+        $sql = "DELETE FROM {$this->table} WHERE {$this->table}.id = :id";
 
         $query = $this->db->prepare($sql);
         $query->bindValue(':id', $id);
@@ -34,12 +34,12 @@ abstract class Manager
      */
     public function countUsers(): int
     {
-        $sql = "SELECT COUNT(*) FROM $this->table";
+        $sql = "SELECT COUNT(*) FROM {$this->table}";
         $query = $this->db->query($sql);
 
-        $n = (int)$query->fetchColumn();
+        $n = (int) $query->fetchColumn();
         $query->closeCursor();
-
+        echo $this->table;
         return $n;
     }
 }

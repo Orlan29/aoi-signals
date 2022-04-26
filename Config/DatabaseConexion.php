@@ -4,10 +4,29 @@ namespace App\Config;
 
 class DatabaseConexion
 {
+    /**
+     * @var string HOST
+     */
     private const HOST = 'localhost';
-    public const  USERNAME = 'root';
-    private const PASSWORD = 'brice';
-    private const DB_NAME = '';
+
+    /**
+     * @var string USERNAME
+     */
+    private const  USERNAME = 'root';
+
+    /**
+     * @var string PASSWORD
+     */
+    private const PASSWORD = '';
+
+    /**
+     * @var string DB_NAME
+     */
+    private const DB_NAME = 'aoi_signals';
+
+    /**
+     * @var object $db
+     */
     private object $db;
 
     public function __toString()
@@ -22,21 +41,19 @@ class DatabaseConexion
      */
     public function connect(): \PDO
     {
-        if (isset($this->db) && $this->db instanceof \PDO) {
-            $this->db->closeCursor();
-        }
 
         try {
             $this->db = new \PDO(
                 'mysql:host=' . self::HOST . ';'
-                    . 'dbname=' . self::DB_NAME . ';'
-                    . 'charset=utf8',
-                self::USERNAME . ',' . self::PASSWORD
+                    . 'dbname=' . self::DB_NAME
+                    . ';charset=utf8',
+                self::USERNAME,
+                self::PASSWORD
             );
 
             $this->db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         } catch (\Exception $e) {
-            die('Une erreur est survenue lors de la connexion à la base de donnée ' . $e->getMessage());
+            die("Echec de connexion à la base de donnée");
         }
 
         return $this->db;

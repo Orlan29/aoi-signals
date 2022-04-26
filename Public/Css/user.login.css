@@ -1,0 +1,293 @@
+.aoi-login {
+    min-height: 100vh;
+    display: flex;
+}
+
+.aoi-login-form-section {
+    min-width: 50%;
+}
+
+.aoi-logo-container {
+    width: 80px;
+    height: 65px;
+    margin-top: 15px;
+    margin-left: 14%;
+}
+
+.aoi-logo {
+    width: 100%;
+    height: auto;
+}
+
+.aoi-form-content {
+    min-height: 85vh !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 70%;
+    margin: auto;
+}
+
+.aoi-form-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: rgba(14, 83, 212, 0.848);
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.aoi-register-title {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.aoi-form-title-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.aoi-form {
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.aoi-sigin-link {
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+}
+
+.aoi-forgot-password{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 0.9em;
+}
+
+.aoi-forgot-password a:hover, .aoi-sigin-link a:hover {
+    text-decoration: none;
+}
+
+.aoi-form-group {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    width: 100%;
+}
+
+.aoi-select-group {
+    display: flex;
+}
+
+.aoi-form-control, .aoi-select-control {
+    position: relative;
+    outline: none;
+    border: 1px solid rgb(235, 235, 235);
+    background-color: rgba(235, 235, 235, 0.425);
+    border-bottom: 1px solid rgb(136, 136, 136);
+    padding: 24px 8px 8px 8px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    height: 14px;
+    width: calc(100% - 18px);
+}
+
+.aoi-select-control {
+    width: 100%;
+    height: 100%;
+    padding-top: 21px;
+}
+
+.aoi-invalid-form-control {
+    background-color: rgba(245, 218, 218, 0.425);
+}
+
+.aoi-invalid-form-control + .aoi-form-label {
+    color: rgb(219, 8, 8);
+}
+
+.aoi-form-control:focus + .aoi-form-label {
+    color: rgba(14, 83, 212, 0.788);
+    top: 8px;
+    font-size: 0.7em;
+}
+
+.aoi-form-label-focus {
+    color: rgba(14, 83, 212, 0.788);
+    top: 8px !important;
+    font-size: 0.7em;
+}
+
+.aoi-form-control-container {
+    position: relative;
+}
+
+.aoi-country-field {
+    height: 100%;
+    width: 50%;
+}
+
+.aoi-town-field {
+    height: 100%;
+    width: 50%;
+    margin-right: 15px;
+}
+
+.aoi-group-field {
+    display: flex;
+    padding: 0;
+    justify-content: space-between;
+}
+
+.aoi-select-control-container {
+    position: relative;
+}
+
+.aoi-select-control-container:not(:first-child) {
+    margin-left: 15px; 
+    position: relative;
+}
+
+.aoi-form-control-container:hover.aoi-form-control-container::after, .aoi-select-control-container:hover.aoi-select-control-container::after{
+    width: 100%;
+}
+
+.aoi-form-control-container::after, .aoi-select-control-container::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0px;
+    height: 2px;
+    background-color: rgb(14, 83, 212);
+    width: 0;
+    transition: 150ms ease;
+}
+
+.aoi-form-label {
+    position: absolute;
+    top: 18px;
+    left: 10px;
+    transition: all 150ms ease-in;
+}
+
+.aoi-select-label {
+    display: inline-block;
+    font-size: 0.85em;
+    margin-bottom: 10px !important;
+}
+
+.aoi-error-container {
+    background-color: rgba(247, 189, 189, 0.623);
+    width: calc(100% - 8px);
+    padding: 15px 8px;
+    text-align: center;
+    border-radius: 3px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: rgb(51, 51, 51);
+}
+
+.aoi-label-error-container {
+    margin-top: 7px;
+    margin-bottom: 7px;
+    font-size: 0.8em;
+    color: rgb(219, 8, 8);
+}
+
+.aoi-error-enable {
+    display: block;
+}
+
+.aoi-error-desable {
+    display: none;
+}
+
+.aoi-login-image-container {
+    width: 100%;
+    height: 100%;
+    background-color: #386c7b;
+}
+
+.aoi-message {
+    text-align: center;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.aoi-login-image {
+    width: 100%;
+    height: auto;
+}
+
+
+.aoi-button {
+    min-width: 120px !important;
+    outline: none;
+    border: none;
+    padding: 12px 14px;
+    background-color: rgb(14, 83, 212);
+    color: #fff;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 3px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    margin: 10px;
+    transition: background-color 150ms ease;
+}
+
+.aoi-button:disabled {
+    background-color: rgba(231, 231, 231, 0.848) !important;
+    color: rgba(95, 95, 95, 0.848) !important;
+    cursor: not-allowed;
+}
+
+.aoi-button:hover, .aoi-button:enabled {
+    background-color: rgba(14, 83, 212, 0.848);
+}
+
+.aoi-checkbox {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    border: 1px solid silver;
+    appearance: none;
+    border-radius: 2px;
+    margin-right: 10px;
+}
+
+.aoi-checkbox:checked.aoi-checkbox::after {
+    display: block;
+}
+
+.aoi-checkbox::after {
+    content: "";
+    position: absolute;
+    left: 2px;
+    right: 2px;
+    top: 2px;
+    bottom: 2px;
+    background-color: rgb(14, 83, 212);
+    border-radius: 2px;
+    display: none;
+}
+
+.aoi-footer-logo {
+    width: 70px;
+    height: auto;
+    margin-right: 10px;
+    display: inline-block !important;
+}
+
+.aoi-form-footer-container {
+    display: flex !important;
+}

@@ -5,17 +5,6 @@ declare(strict_types=1);
 namespace App\Models\Admin;
 
 use App\Models\Person;
-use App\Config\Autoloader as Autoloader;
-
-/**
- * Contain root path
- *@var string $ROOT
- */
-$ROOT = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR;
-
-require_once $ROOT . 'Config/Autoloader.php';
-
-Autoloader::register();
 
 class Admin extends Person
 {

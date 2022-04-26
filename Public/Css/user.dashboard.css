@@ -1,0 +1,533 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap');
+
+@keyframes home_nav_anim {
+    from {
+
+    }
+}
+
+* {
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.aoi-error-container, .aoi-validate-container {
+    background-color: rgba(247, 189, 189, 0.623);
+    width: calc(40% - 15px);
+    padding: 15px 8px;
+    border-radius: 3px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: rgb(51, 51, 51);
+}
+
+.aoi-validate-container {
+    text-align: center;
+    background-color: rgba(189, 247, 197, 0.623);
+}
+
+.aoi-header {
+    box-shadow: 4px 0px 7px rgba(0, 0, 0, 0.4);
+}
+
+.aoi-header-content {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.aoi-header-img-container {
+    width: 70px;
+    height: 70px;
+}
+
+.aoi-img {
+    width: 100%;
+    height: auto;
+}
+
+.aoi-search-container {
+    width: 30%;
+    height: 30px;
+}
+
+.aoi-search {
+    display: inline-block;
+    width: calc(100% - 20px) !important;
+    border: none;
+    margin-left: 15px;
+    margin-right: 15px;
+    background-color: transparent;
+    outline: none;
+    padding: 5px;
+    font-size: 16px;
+    color: rgb(44, 44, 44);
+}
+
+.aoi-search-content {
+    border: 1px solid transparent;
+    width: 37px;
+    display: flex;
+    align-items: center;
+    border-radius: 25px;
+    padding: 2px;
+}
+
+.aoi-search-content-visible {
+    position: absolute;
+    top: 19px;
+    right: 263px;
+    width: auto;
+    background-color: rgba(14, 83, 212, 0.103);
+    border-color: rgba(14, 83, 212, 0.479);
+}
+
+.aoi-header-search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 170px;
+}
+
+.aoi-header-search-active {
+    align-self: flex-end !important;
+}
+
+.aoi-search-icon-content, .aoi-back-btn {
+    cursor: pointer;
+    width: 37px;
+    height: 37px;
+    border-radius: 25px;
+    text-align: center;
+    line-height: 2.45rem;
+}
+
+.aoi-search-icon, .aoi-back-btn-icon {
+    font-size: 16px;
+}
+
+.aoi-search-icon-content:hover, .aoi-back-btn:hover {
+    background-color:rgba(14, 83, 212, 0.103);
+}
+
+.aoi-search-icon-content:hover .aoi-search-icon,
+.aoi-back-btn:hover .aoi-back-btn-icon {
+    color:rgb(14, 83, 212);
+}
+
+.aoi-search-icon-content-visible {
+    color: rgba(14, 83, 212, 0.479);
+}
+
+.aoi-nav {
+    border-radius: 4px;
+    min-width: 220px;
+    position: absolute;
+    top: 75px;
+    right: 40px;
+    background-color: rgb(248, 248, 248);
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+    opacity: 0.9;
+}
+
+.aoi-nav-mask {
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    overflow-x: hidden;
+}
+
+.aoi-mask-active {
+    z-index: 3;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.37);
+}
+
+.aoi-home-nav {
+    height: calc(100vh - 30px);
+    width: calc(40% - 30px);
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #fff;
+    color: #000;
+    padding: 15px;
+    opacity: 0;
+    transform: translateX(800px);
+    transition: transform 250ms ease-in;
+}
+
+.aoi-home-nav-active {
+    transform: translateX(0px);
+    opacity: 1;
+}
+
+.aoi-home-nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.aoi-home-nav-content {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.aoi-home-nav-image-content {
+    width: 50px;
+    height: 50px;
+}
+
+.aoi-home-nav-image {
+    width: 100%;
+    height: auto;
+}
+
+.aoi-home-nav-link {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 15px 10px;
+    border-radius: 2px;
+    text-decoration: none;
+    color: rgb(37, 37, 37);
+    display: block;
+    font-size: 18px;
+}
+
+.aoi-home-nav-copy {
+    text-align: center;
+    font-size: 13px;
+    color: rgb(70, 70, 70)
+}
+
+.aoi-home-nav-link:hover {
+    background-color: rgba(14, 83, 212, 0.089);
+    color: rgba(14, 83, 212, 0.89);
+}
+
+.aoi-nav-hidden {
+    display: none;
+}
+
+.aoi-nav-visible {
+    display: block;
+}
+
+.aoi-user-profile-btn, .aoi-home-nav-btn {
+    cursor: pointer;
+    border: 1px solid rgb(212, 87, 14, 0.788);
+    outline: none;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 25px;
+    color: #fff;
+    background-color: rgb(212, 87, 14, 0.788);
+}
+
+.aoi-home-nav-btn {
+    background-color: transparent;
+    border-color: rgb(14, 83, 212);
+}
+
+.aoi-home-nav-btn:hover {
+    background-color: rgba(14, 83, 212, 0.329);
+    border-color: rgba(14, 83, 212, 0.459);
+}
+
+.aoi-home-nav-btn:hover .aoi-nav-item-icon {
+    color: rgba(14, 83, 212, 0.774);
+}
+
+.aoi-home-nav-btn .aoi-nav-item-icon {
+    color: rgb(14, 83, 212);
+    padding: 0;
+}
+
+.aoi-user-profile-btn:hover {
+    background-color: rgba(212, 87, 14, 0.678);
+}
+
+.aoi-nav-item {
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+    color: rgb(34, 34, 34) !important;
+    opacity: 1;
+}
+
+.aoi-nav-item-icon {
+    display: inline-block;
+    font-size: 20px;
+    line-height: normal;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: rgb(34, 34, 34);
+    opacity: inherit;
+}
+
+.aoi-nav-item-link {
+    text-decoration: none;
+    color: rgb(34, 34, 34);
+    display: inline-block;
+    width: 100%;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    opacity: inherit;
+}
+
+.aoi-user-name {
+    font-weight: bold;
+}
+
+.aoi-nav-item-link:hover .aoi-user-icon {
+    color: rgb(34, 34, 34) !important;
+}
+
+.aoi-logout-icon {
+    transform: rotate(-90deg);
+}
+
+.aoi-nav-item-link:hover, .aoi-nav-item-link:hover .aoi-nav-item-icon {
+    color: rgb(14, 83, 212);
+}
+
+.aoi-nav-item:first-child {
+    border: none;
+}
+
+.aoi-banner-section {
+    height: 180px;
+    color: #fff;
+    background-color: rgb(14, 83, 212);
+}
+
+.aoi-banner-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+    width: 70%;
+    margin: auto;
+}
+
+.aoi-banner-title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.aoi-banner-nav {
+    margin: auto;
+    position: absolute;
+    bottom: 0;
+}
+
+.aoi-banner-nav-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.aoi-banner-nav-items {
+    font-size: 1.2rem;
+    padding: 8px 12px;
+    cursor: pointer;
+    margin-right: 20px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.aoi-banner-nav-items:last-child {
+    margin-right: 0px;
+}
+
+.aoi-banner-nav-items:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.aoi-banner-nav-items-active {
+    border-bottom: 3px solid #fff;
+}
+
+.aoi-settings-section {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.aoi-profil-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.aoi-profil-header {
+    display: flex;
+    align-items: center;
+}
+
+.aoi-profil-content {
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
+    padding: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
+
+.aoi-profil-picture-content {
+    width: 120px;
+    height: 120px;
+    border: 1px solid silver;
+    border-radius: 70px;
+}
+
+.aoi-profil-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.aoi-section-title, .aoi-alert-title {
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.aoi-section-title, .aoi-home-nav-title {
+    font-size: 1.25rem;
+}
+
+.aoi-home-nav-title {
+    font-weight: bold;
+}
+
+.aoi-alert {
+    border-radius: 5px;
+    background: linear-gradient(to bottom right, rgba(14, 83, 212, 0.55), rgba(241, 162, 116, 0.5));
+    color: rgb(59, 59, 59);
+    box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.3);
+}
+
+.aoi-alert-text {
+    margin-top: 7px;
+    margin-bottom: 7px;
+    line-height: normal;
+}
+
+.aoi-alert-title {
+    font-size: 1.5rem;
+}
+
+.aoi-section-items {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.aoi-section-active {
+    display: block;
+}
+
+.aoi-section-hidden, .aoi-search-hidden {
+    display: none;
+}
+
+.aoi-settings-form-content {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 10px;
+}
+
+.aoi-form-group {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+
+.aoi-form-group-text a {
+    color: rgba(0, 0, 0, 0.733);
+    font-size: 0.9rem;
+}
+
+.aoi-form-control {
+    outline: none;
+    border: 1px solid rgb(235, 235, 235);
+    background-color: rgba(235, 235, 235, 0.425);
+    border-bottom: 1px solid rgb(136, 136, 136);
+    padding: 8px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.aoi-form-label {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.aoi-text-danger {
+    color: rgb(219, 8, 8);
+}
+
+.aoi-button {
+    min-width: 120px !important;
+    outline: none;
+    border: none;
+    padding: 8px 10px;
+    background-color: rgb(14, 83, 212);
+    color: #fff;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 3px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    transition: background-color 150ms ease;
+}
+
+.aoi-button:hover {
+    background-color: rgba(14, 83, 212, 0.848);
+}
+
+.aoi-table {
+    width: 100%;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.aoi-table-head {
+    background-color: rgb(212, 87, 14, 0.788);
+    color: #fff;
+}
+
+.aoi-table-head th {
+    text-align: left;
+    padding: 15px;
+    font-weight: bold;
+}
+
+.aoi-table-body td {
+    padding: 15px 8px;
+}

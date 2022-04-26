@@ -23,7 +23,7 @@ class PremiumUserManager extends Manager
     {
         $sql = "SELECT * FROM $this->table WHERE $this->table.id = :id";
 
-        $query = $this->db_connect->prepare($sql);
+        $query = $this->db->prepare($sql);
         $query->bindValue(':id', $id);
         $query->execute();
 
@@ -139,19 +139,5 @@ class PremiumUserManager extends Manager
         $query->bindValue(':id', $id);
         $query->execute();
         $query->closeCursor();
-    }
-
-    /**
-     * @return int
-     */
-    public function countUsers(): int
-    {
-        $sql = "SELECT COUNT(*) FROM $this->table";
-        $query = $this->db->query($sql);
-
-        $n = (int)$query->fetchColumn();
-        $query->closeCursor();
-
-        return $n;
     }
 }
