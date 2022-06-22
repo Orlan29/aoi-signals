@@ -6,9 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
-    <link rel="icon" type="image/png" sizes="16x16" href="Public/Img/logo.jpg">
+    <link rel="icon" type="image/png" sizes="25x25" href="./Public/Img/logo.png">
     <link rel="stylesheet" href="Public/Css/reset.css">
     <link rel="stylesheet" href="Public/Css/user.login.css">
+    <link rel="stylesheet" href="./Public/Css/responsive.css">
     <script type="text/javascript" src="Public/Js/user.form.js" defer></script>
     <script type="text/javascript" src="Public/Js/form.control.js" defer></script>
 </head>

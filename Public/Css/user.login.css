@@ -69,6 +69,12 @@
     font-size: 0.9em;
 }
 
+#forgot-password-form {
+    width: 80% !important;
+    align-self: flex-start;
+    padding: 0;
+}
+
 .aoi-forgot-password a:hover, .aoi-sigin-link a:hover {
     text-decoration: none;
 }
@@ -171,6 +177,7 @@
 
 .aoi-form-label {
     position: absolute;
+    display: inline-block;
     top: 18px;
     left: 10px;
     transition: all 150ms ease-in;
@@ -191,6 +198,10 @@
     margin-top: 5px;
     margin-bottom: 5px;
     color: rgb(51, 51, 51);
+}
+
+.aoi-success {
+    background-color: rgba(189, 247, 218, 0.623);
 }
 
 .aoi-label-error-container {

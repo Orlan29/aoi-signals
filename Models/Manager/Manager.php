@@ -39,7 +39,6 @@ abstract class Manager
 
         $n = (int) $query->fetchColumn();
         $query->closeCursor();
-        echo $this->table;
         return $n;
     }
 }

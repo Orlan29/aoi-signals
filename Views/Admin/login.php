@@ -9,8 +9,9 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../Public/Img/logo.jpg">
     <link rel="stylesheet" href="../Public/Css/reset.css">
     <link rel="stylesheet" href="../Public/Css/user.login.css">
-    <script type="text/javascript" src="../Public/Js/user.login.js" defer></script>
-    <script type="text/javascript" src="../Public/Js/login.js" defer></script>
+    <link rel="stylesheet" href="../Public/Css/responsive.css">
+    <script type="text/javascript" src="../Public/Js/user.form.js" defer></script>
+    <script type="text/javascript" src="../Public/Js/form.control.js" defer></script>
 </head>
 
 <body>
@@ -23,7 +24,7 @@
                 <div class="aoi-form-title-container">
                     <h1 class="aoi-form-title">Connexion Administrateur</h1>
                 </div>
-                <form class="aoi-form" action="/signals/u/verify" method="post">
+                <form class="aoi-form" action="/signals/a/verify" method="post">
                     <?php if (isset($_SESSION['login_error'])) : ?>
                         <div class="aoi-error-container">
                             <span class="aoi-error"><?= $_SESSION['login_error'] ?></span>
@@ -47,8 +48,8 @@
                             <span class="aoi-password-error aoi-label-error aoi-error-desable">Cet champs ne doit pas être vide.</span>
                         </div>
                     </div>
-                    
-                        <button class="aoi-button" type="submit">Se connecter</button>
+
+                    <button class="aoi-button" type="submit">Se connecter</button>
                 </form>
             </div>
         </section>

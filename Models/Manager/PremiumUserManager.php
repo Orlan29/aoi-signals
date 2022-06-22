@@ -21,7 +21,7 @@ class PremiumUserManager extends Manager
      */
     public function getPremiumUser(int $id): PremiumUser
     {
-        $sql = "SELECT * FROM $this->table WHERE $this->table.id = :id";
+        $sql = "SELECT * FROM {$this->table} WHERE $this->table.id = :id";
 
         $query = $this->db->prepare($sql);
         $query->bindValue(':id', $id);

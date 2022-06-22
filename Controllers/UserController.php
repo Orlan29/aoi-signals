@@ -33,7 +33,7 @@ class UserController
         }
 
         //if (!$this->user_manager->isPremiumUser($id))
-            return $this->user_manager->getUserById($id);
+        return $this->user_manager->getUserById($id);
         /*else
             return $this->user_manager->getPremiumUser($id);*/
     }
@@ -46,7 +46,7 @@ class UserController
     {
         return array(
             'users' => $this->user_manager->getAllUsers(),
-            'number' => $this->user_manager->countUsers()
+            'user_number' => $this->user_manager->countUsers()
         );
     }
 
@@ -76,6 +76,16 @@ class UserController
         }
 
         $this->user_manager->updateUser($user);
+    }
+
+    /**
+     * @param string $path
+     * @param string $email
+     * @return void
+     */
+    public function upload_profile_image(string $path, string $email): void
+    {
+        $this->user_manager->upload_image($path, $email);
     }
 
     /**

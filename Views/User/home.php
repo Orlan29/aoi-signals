@@ -1,8 +1,3 @@
-<?php
-$title = 'Aoi-Signals - Accueil';
-require_once './Views/templates/header.php';
-?>
-
 <main class="aoi-home">
   <section class="aoi-home-section">
     <div class="aoi-home-get-stated">
@@ -21,5 +16,3 @@ require_once './Views/templates/header.php';
     </div>
   </section>
 </main>
-
-<?php require_once './Views/templates/footer.php'; ?>

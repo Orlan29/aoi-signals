@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
-    <link rel="icon" type="image/png" sizes="16x16" href="Public/Img/logo.jpg">
+    <link rel="icon" type="image/png" sizes="25x25" href="./Public/Img/logo.png">
     <link rel="stylesheet" href="Public/Css/reset.css">
     <link rel="stylesheet" href="Public/Css/user.login.css">
+    <link rel="stylesheet" href="./Public/Css/responsive.css">
     <script type="text/javascript" src="Public/Js/user.form.js" defer></script>
     <script type="text/javascript" src="Public/Js/form.control.js" defer></script>
 </head>
@@ -84,9 +85,9 @@
                                     <?php
                                     $months = array('Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre');
 
-                                    foreach ($months as $month) :
+                                    foreach ($months as $key => $value) :
                                     ?>
-                                        <option value="<?= $month ?>"><?= $month ?></option>
+                                        <option value="<?= $key ?>"><?= $value ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>

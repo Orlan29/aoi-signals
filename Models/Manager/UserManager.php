@@ -56,6 +56,21 @@ class UserManager extends PremiumUserManager
     }
 
     /**
+     * @param string $path
+     * @param string $email
+     * @return void
+     */
+    public function upload_image(string $path, string $email): void
+    {
+        $sql = "UPDATE {$this->table} SET profile_image = :image_path WHERE email = :email";
+
+        $query = $this->db->prepare($sql);
+        $query->bindValue(':email', $email);
+        $query->bindValue(':image_path', $path);
+        $query->execute();
+    }
+
+    /**
      * @param User $user
      * @return void
      */
@@ -70,6 +85,7 @@ class UserManager extends PremiumUserManager
             phone,
             city,
             country,
+            godfather_id,
             birthday,
             user_ref)
             VALUES(
@@ -81,6 +97,7 @@ class UserManager extends PremiumUserManager
                 :phone,
                 :city,
                 :country,
+                :godfather_id,
                 :birthday,
                 :user_ref)";
 
@@ -89,8 +106,7 @@ class UserManager extends PremiumUserManager
         $query->bindValue(':last_name', $user->getLast_name());
         $query->bindValue(':first_name', $user->getFirst_name());
         $query->bindValue(':email', $user->getEmail());
-        //$query->bindValue(':godfather_id', $user->getGodfather_id());
-        //$query->bindValue(':godson_id', $user->getGodson_id());
+        $query->bindValue(':godfather_id', $user->getGodfather_id());
         $query->bindValue(':user_password', $user->getUser_password());
         $query->bindValue(':phone', $user->getPhone());
         $query->bindValue(':city', $user->getCity());
@@ -112,7 +128,8 @@ class UserManager extends PremiumUserManager
                 last_name = :last_name,
                 first_name = :first_name,
                 email = :email,
-                user_password = :user_password";
+                user_password = :user_password
+            WHERE phone = :phone";
 
         $query = $this->db->prepare($sql);
 
@@ -120,6 +137,7 @@ class UserManager extends PremiumUserManager
         $query->bindValue(':first_name', $user->getFirst_name());
         $query->bindValue(':email', $user->getEmail());
         $query->bindValue(':user_password', $user->getUser_password());
+        $query->bindValue(':phone', $user->getPhone());
 
         $query->execute();
     }

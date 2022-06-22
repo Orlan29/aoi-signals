@@ -73,6 +73,16 @@ class AdminController
     }
 
     /**
+     * @param string $path
+     * @param string $email
+     * @return void
+     */
+    public function upload_profile_image(string $path, string $email): void
+    {
+        $this->manager->upload_image($path, $email);
+    }
+
+    /**
      * Add information about admin in database
      * @param Admin $admin
      * @return void

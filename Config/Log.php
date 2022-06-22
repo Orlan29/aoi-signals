@@ -4,9 +4,15 @@ declare(strict_types=1);
 
 namespace App\Config;
 
+use App\models\User\User as User;
+use App\models\Admin\Admin as Admin;
+
+require_once './Models/User/User.php';
+require_once './Models/Admin/Admin.php';
+
 class Log
 {
-    public object $db;
+    public \PDO $db;
     protected string $table;
 
     public function __construct(\PDO $db, bool $is_user)
@@ -28,11 +34,11 @@ class Log
      */
     public function isRegistered(string $email, string $password): bool
     {
-        $email_exist = $this->emailVerify($email);
+        $user = $this->emailVerify($email);
         $password_exist = $this->passwordVerify($password);
 
         // Return true if user is finded in database and false if not
-        return ($email_exist && $password_exist) ? true : false;
+        return (isset($user) && $password_exist) ? true : false;
     }
 
     /**
@@ -42,19 +48,19 @@ class Log
      */
     public function isAvailable(string $email, int $phone): bool
     {
-        $email_exist = $this->emailVerify($email);
+        $user = $this->emailVerify($email);
         $phone_exist = $this->phoneVerify($phone);
 
         // Return true if email or phone number is finded in database and false if not
-        return ($email_exist || $phone_exist) ? true : false;
+        return (isset($user) || $phone_exist) ? true : false;
     }
 
     /**
      * @param string $email
-     * @return bool
+     * @return User|Admins|Null
      */
 
-    public function emailVerify(string $email): bool
+    public function emailVerify(string $email)
     {
         $sql = "SELECT * FROM {$this->table} WHERE email = :email";
 
@@ -62,26 +68,32 @@ class Log
         $query->bindValue(':email', $email);
         $query->execute();
 
-        $data = (int)$query->fetchColumn();
+        $data = $query->fetch(\PDO::FETCH_ASSOC);
 
-        return (!empty($data) && $data === 1) ? true : false;
+
+        if ($this->table === 'Users') {
+            return gettype($data) === 'array' ? new User($data) : Null;
+        } else {
+            return gettype($data) === 'array' ? new Admin($data) : Null;
+        }
     }
 
-
     /**
-     * @var string $ref
-     * @return int|void
+     * @var string $str
+     * @return array
      */
-    public function isValidRef(string $ref)
+    private function extractDate(string $str)
     {
-        if (empty($ref)) return;
+        if (empty($str)) return;
+
+        $str = str_replace('aoi_', '', $str);
 
         $regex = '#^([a-z]+)([0-9]+)$#';
-        $date_regex = '#(\d{4})(\d{2})(\d{2})#';
+        $date_regex = '#(\d{4})(\d{1,2})(\d{1,2})#';
 
-        preg_match($regex, $ref, $matches, PREG_OFFSET_CAPTURE);
+        preg_match($regex, $str, $matches, PREG_OFFSET_CAPTURE);
 
-        // Delete first match
+        // Delete false match
         array_shift($matches);
 
         // Get first match
@@ -99,30 +111,57 @@ class Log
         $month = $date[1][0];
         $day = $date[2][0];
 
-        $birthday = "{$year}-{$month}-{$day}";
+        return array(
+            "birthday" => "{$year}-{$month}-{$day}",
+            "last_name" => $last_name
+        );
+    }
 
-        $sql = "SELECT * FROM {$this->table} WHERE last_name = :lastName AND birthday = :birthday";
+    /**
+     * @var string $name
+     * @var string $date
+     * @return string|void
+     */
+    public function ref_generator(string $name, string $date)
+    {
+        if (empty($name) || empty($date)) return;
+
+        $date = str_replace('-', '', $date);
+
+        return 'aoi_' . lcfirst($name) . $date;
+    }
+
+
+    /**
+     * @var string $ref
+     * @return User|void
+     */
+    public function isValidRef(string $ref)
+    {
+        $name_birth = $this->extractDate($ref);
+
+        $sql = "SELECT id FROM {$this->table} WHERE last_name = :lastName AND birthday = :birthday";
 
         $query = $this->db->prepare($sql);
-        $query->bindValue(':lastName', $last_name);
-        $query->bindValue(':birthday', $birthday);
+        $query->bindValue(':lastName', ucfirst($name_birth['last_name']));
+        $query->bindValue(':birthday', $name_birth['birthday']);
         $query->execute();
 
-        $data = (int)$query->fetchColumn();
+        $data = $query->fetch(\PDO::FETCH_ASSOC);
 
-        if ($data === 1) :
-            return (int) $query->fetch()['id'];
-        else :
+        if ((int) count($data) === 1) {
+            return new User($data);
+        } else {
+
             $_SESSION['ref_error'] = 'Numéro de référence invalide';
             header('Location: /signals/register');
-        endif;
+        }
     }
 
     /**
      * @param int $phone
      * @return bool
      */
-
     public function phoneVerify(int $phone): bool
     {
         $sql = "SELECT * FROM {$this->table} WHERE phone = :phone";

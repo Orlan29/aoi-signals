@@ -4,34 +4,30 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-abstract class Person
+abstract class Person implements \JsonSerializable
 {
     protected string $last_name;
     protected string $first_name;
     protected string $user_password;
     protected string $email;
-    protected int $id;
+    protected ?int $id = null;
+    protected ?string $profile_image = null;
     protected bool $is_user = true;
 
     /**
      * This method is called when the class is instantiated
      * and assign value for each setter methods
      * 
+     * @param array $user
      * @return void
      */
-
     protected function hydrate(array $user): void
     {
         foreach ($user as $key => $value) {
-            if (is_string($key)) {
-                $method = 'set' . ucfirst($key);
+            $method = 'set' . ucfirst($key);
 
-                if (method_exists($this, $method) && !empty($value)) {
-                    $this->$method($value);
-                    /*echo '<pre>';
-                    var_dump($method);
-                    echo '</pre>';*/
-                }
+            if (method_exists($this, $method) && !empty($value)) {
+                $this->$method($value);
             }
         }
     }
@@ -41,7 +37,6 @@ abstract class Person
     /**
      * @return bool
      */
-
     public function getRole(): bool
     {
         return $this->is_user;
@@ -50,7 +45,6 @@ abstract class Person
     /**
      * @return string
      */
-
     public function getLast_name(): string
     {
         return $this->last_name;
@@ -59,25 +53,30 @@ abstract class Person
     /**
      * @return string
      */
-
     public function getEmail(): string
     {
         return $this->email;
     }
 
     /**
-     * @return int
+     * @return null|int
      */
-
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
+     * @return null|string
+     */
+    public function getProfile_image()
+    {
+        return $this->profile_image;
+    }
+
+    /**
      * @return string
      */
-
     public function getFirst_name(): string
     {
         return $this->first_name;
@@ -86,7 +85,6 @@ abstract class Person
     /**
      * @return string
      */
-
     public function getUser_password(): string
     {
         return $this->user_password;
@@ -144,6 +142,19 @@ abstract class Person
         }
 
         $this->last_name = $name;
+    }
+
+    /**
+     * @var string $name
+     * @return void
+     */
+    public function setProfile_image(string $name)
+    {
+        if (!isset($name)) {
+            return;
+        }
+
+        $this->profile_image = $name;
     }
 
     /**

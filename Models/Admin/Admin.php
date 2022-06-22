@@ -8,7 +8,6 @@ use App\Models\Person;
 
 class Admin extends Person
 {
-    protected int $admin_grant;
     protected bool $is_user = false;
 
     public function __construct(array $user)
@@ -16,30 +15,13 @@ class Admin extends Person
         $this->hydrate($user);
     }
 
-    // GETTER
-
-    /**
-     * @return int
-     */
-
-    public function getAdmin_grant(): int
+    public function jsonSerialize(): mixed
     {
-        return $this->admin_grant;
-    }
-
-    // SETTER
-
-    /**
-     * @param int $grant
-     * @return void
-     */
-
-    public function setAdmin_grant(int $grant): void
-    {
-        if (!isset($grant) && $grant <= 0) {
-            return;
-        }
-
-        $this->admin_grant = $grant;
+        return array(
+            'name' => "{$this->first_name} {$this->last_name}",
+            'email' => $this->email,
+            'profile_image' => $this->profile_image,
+            'id' => $this->id
+        );
     }
 }

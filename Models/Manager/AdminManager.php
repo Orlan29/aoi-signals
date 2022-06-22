@@ -9,25 +9,55 @@ use App\Models\Manager\Manager as Manager;
 
 class AdminManager extends Manager
 {
-    protected object $db;
-    protected object $admin;
+    protected \PDO $db;
 
-    public function __construct(Admin $admin, \PDO $db)
+    public function __construct(\PDO $db)
     {
-        $this->user = $admin;
         $this->db = $db;
-        $this->table = 'Admin';
+        $this->table = 'Admins';
     }
 
+    /**
+     * @param int $id
+     * @return Admin
+     */
     public function getAdminById(int $id): Admin
     {
-        $data = parent::getUserById($id);
+        $sql = "SELECT * FROM {$this->table} WHERE {$this->table}.id = :id";
+
+        $query = $this->db->prepare($sql);
+        $query->bindValue(':id', $id);
+        $query->execute();
+
+        $data = $query->fetch(\PDO::FETCH_ASSOC);
+
         return new Admin($data);
     }
 
+    /**
+     * @param string $path
+     * @param string $email
+     * @return void
+     */
+    public function upload_image(string $path, string $email): void
+    {
+        $sql = "UPDATE {$this->table} SET profile_image = :image_path WHERE email = :email";
+
+        $query = $this->db->prepare($sql);
+        $query->bindValue(':email', $email);
+        $query->bindValue(':image_path', $path);
+        $query->execute();
+    }
+
+    /**
+     * @return array
+     */
     public function getAllAdmins(): array
     {
-        $query = parent::getAllUsers();
+        $sql = "SELECT * FROM {$this->table}";
+
+        $query = $this->db->query($sql);
+
         $admins = [];
 
         while ($row = $query->fetch(\PDO::FETCH_ASSOC)) {
@@ -37,55 +67,59 @@ class AdminManager extends Manager
         return $admins;
     }
 
+    /**
+     * @param Admin $admin
+     * @return void
+     */
     public function addAdmin(Admin $admin): void
     {
-        if (!is_a($admin, 'Admin')) {
-            return;
-        }
-
-        $sql = 'INSERT INTO Admins(
+        $sql = "INSERT INTO {$this->table}(
             last_name,
             first_name,
+            profile_image,
             email,
             user_password)
             VALUES(
                 :last_name,
                 :first_name,
+                :path_name,
                 :email,
-                :user_password);
-        ';
+                :user_password)";
 
         $query = $this->db->prepare($sql);
 
-        $query->bind_param(':last_name', $admin->last_name);
-        $query->bindValue(':first_name', $admin->first_name);
-        $query->bindValue(':email', $admin->email);
-        $query->bindValue(':user_password', $admin->user_password);
+        $query->bindValue(':last_name', $admin->getLast_name());
+        $query->bindValue(':first_name', $admin->getFirst_name());
+        $query->bindValue(':path_name', $admin->getProfile_image());
+        $query->bindValue(':email', $admin->getEmail());
+        $query->bindValue(':user_password', $admin->getUser_password());
 
         $query->execute();
         $query->closeCursor();
     }
 
+    /**
+     * @param Admin $admin
+     * @return void
+     */
     public function updateAdmin(Admin $admin): void
     {
-        if (!is_a($admin, 'Admin')) {
-            return;
-        }
-
         $sql = 'UPDATE Admins
             SET
                 last_name = :last_name,
                 first_user = :first_name,
                 email = :email,
+                profile_image = :path_name,
                 user_password = :user_password);
         ';
 
         $query = $this->db->prepare($sql);
 
-        $query->bindValue(':last_name', $admin->last_name);
-        $query->bindValue(':first_name', $admin->first_name);
-        $query->bindValue(':email', $admin->email);
-        $query->bindValue(':user_password', $admin->user_password);
+        $query->bindValue(':last_name', $admin->getLast_name());
+        $query->bindValue(':first_name', $admin->getFirst_name());
+        $query->bindValue(':email', $admin->getEmail());
+        $query->bindValue(':path_name', $admin->getProfile_image());
+        $query->bindValue(':user_password', $admin->getUser_password());
 
         $query->execute();
         $query->closeCursor();
